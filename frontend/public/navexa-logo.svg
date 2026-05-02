@@ -1,0 +1,45 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dynamic Dark Outer Gradient Background for Favicon -->
+  <rect width="256" height="256" rx="56" fill="url(#bg-gradient)"/>
+  
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="256" y2="256" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1e1b4b"/>
+      <stop offset="0.5" stop-color="#3b0764"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    
+    <linearGradient id="ai-n-left" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="1" />
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.2" />
+    </linearGradient>
+    <linearGradient id="ai-n-right" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="1" />
+      <stop offset="100%" stop-color="#9333ea" stop-opacity="0.2" />
+    </linearGradient>
+    <linearGradient id="ai-n-slash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e879f9" stop-opacity="1" />
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.5" />
+    </linearGradient>
+  </defs>
+
+  <!-- Centered Futuristic N Logo -->
+  <g>
+    <!-- Left Pillar -->
+    <path d="M60 200 L60 80 L100 56 L100 200 Z" fill="url(#ai-n-left)" />
+    <!-- Right Pillar -->
+    <path d="M156 56 L156 176 L196 200 L196 56 Z" fill="url(#ai-n-right)" />
+    <!-- Diagonal Slash overlapping -->
+    <path d="M60 80 L100 56 L196 200 L156 224 Z" fill="url(#ai-n-slash)" />
+    
+    <!-- Futuristic Accents / Nodes -->
+    <circle cx="100" cy="56" r="6" fill="#e879f9" />
+    <circle cx="156" cy="224" r="6" fill="#3b82f6" />
+    <circle cx="196" cy="56" r="4" fill="#c084fc" />
+    <circle cx="60" cy="200" r="4" fill="#38bdf8" />
+    
+    <!-- Tech lines -->
+    <path d="M30 80 L45 80" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+    <path d="M211 200 L226 200" stroke="#c084fc" stroke-width="8" stroke-linecap="round" />
+  </g>
+</svg>

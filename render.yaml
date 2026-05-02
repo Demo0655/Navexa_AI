@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: navexa-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GOOGLE_AI_API_KEY
+        sync: false # User will set this in Render UI
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: PORT
+        value: 5000
+    rootDir: backend

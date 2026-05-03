@@ -47,18 +47,17 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xl animate-fade-in">
-      <div className="relative w-full max-w-4xl bg-[#171717] rounded-[2rem] border border-[#333] shadow-[0_0_100px_rgba(59,130,246,0.15)] overflow-hidden flex flex-col md:flex-row animate-zoom-in">
+    <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-4xl bg-[#171717] rounded-t-[2.5rem] sm:rounded-[2rem] border-t sm:border border-[#333] shadow-[0_0_100px_rgba(59,130,246,0.15)] overflow-hidden flex flex-col md:flex-row animate-slide-up sm:animate-zoom-in max-h-[92vh] sm:max-h-none">
         
         {/* Abstract Background Element */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] pointer-events-none translate-y-1/2 -translate-x-1/3"></div>
-
-        {/* Left Side - Info/Graphic */}
-        <div className="w-full md:w-5/12 bg-gradient-to-br from-[#0a0a0a] to-[#171717] p-10 flex flex-col justify-between relative border-r border-[#333] z-10 hidden md:flex">
+        <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+        
+        {/* Left Side - Info/Graphic (Desktop Only) */}
+        <div className="hidden md:flex w-5/12 bg-gradient-to-br from-[#0a0a0a] to-[#171717] p-10 flex flex-col justify-between relative border-r border-[#333] z-10">
           <div>
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 mb-8 animate-float">
-              <Sparkles className="text-white" size={24} />
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 mb-8">
+              <NavexaLogo size={24} isDark={true} />
             </div>
             <h2 className="text-3xl font-bold text-white tracking-tight mb-4">
               Unlock the Power of <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Navexa AI</span>
@@ -68,44 +67,53 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
             </p>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-[#262626]/50 border border-[#333]">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="text-xs text-gray-300 font-medium">Secure End-to-End Encryption</span>
-            </div>
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-[#262626]/50 border border-[#333]">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+            <span className="text-xs text-gray-300 font-medium">Secure End-to-End Encryption</span>
           </div>
         </div>
 
         {/* Right Side - Form */}
-        <div className="w-full md:w-7/12 p-8 md:p-12 relative z-10 flex flex-col justify-center bg-[#171717]">
+        <div className="w-full md:w-7/12 p-6 md:p-12 relative z-10 flex flex-col bg-[#171717] overflow-y-auto">
+          {/* Mobile Handle */}
+          <div className="w-12 h-1 bg-[#333] rounded-full mx-auto mb-6 md:hidden"></div>
+
           <button 
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-full hover:bg-[#262626] text-gray-400 hover:text-white transition-colors"
+            className="absolute top-4 md:top-6 right-4 md:right-6 p-2 rounded-full hover:bg-[#262626] text-gray-400 hover:text-white transition-colors z-20"
           >
             <X size={20} />
           </button>
 
           <div className="max-w-md w-full mx-auto">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-white mb-2">{isLogin ? 'Welcome Back' : 'Create Account'}</h3>
+            {/* Mobile Logo */}
+            <div className="md:hidden flex flex-col items-center mb-6">
+               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-3 shadow-lg shadow-blue-500/20">
+                  <NavexaLogo size={20} isDark={true} />
+               </div>
+               <h3 className="text-xl font-bold text-white">Navexa AI</h3>
+            </div>
+
+            <div className="text-center md:text-left mb-8">
+              <h3 className="text-2xl font-bold text-white mb-2 hidden md:block">{isLogin ? 'Welcome Back' : 'Create Account'}</h3>
               <p className="text-sm text-gray-400">
                 {isLogin ? 'Enter your details to continue.' : 'Join Navexa AI for free today.'}
               </p>
             </div>
 
             {error && (
-              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm animate-shake">
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs animate-shake">
                 {error}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="relative group">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" size={20} />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" size={18} />
                 <input
                   type="email"
                   placeholder="Email address"
-                  className="w-full bg-[#0a0a0a] border border-[#333] rounded-xl py-3.5 pl-12 pr-4 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
+                  className="w-full bg-[#0a0a0a] border border-[#333] rounded-xl py-3 md:py-3.5 pl-11 pr-4 text-sm md:text-base text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all outline-none"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -113,11 +121,11 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
               </div>
 
               <div className="relative group">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" size={20} />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" size={18} />
                 <input
                   type="password"
                   placeholder="Password"
-                  className="w-full bg-[#0a0a0a] border border-[#333] rounded-xl py-3.5 pl-12 pr-4 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
+                  className="w-full bg-[#0a0a0a] border border-[#333] rounded-xl py-3 md:py-3.5 pl-11 pr-4 text-sm md:text-base text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all outline-none"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -127,14 +135,14 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 bg-white text-black hover:bg-gray-200 rounded-xl font-bold flex items-center justify-center gap-2 transition-all transform active:scale-[0.98] mt-6"
+                className="w-full py-3 md:py-3.5 bg-white text-black hover:bg-gray-100 rounded-xl font-bold flex items-center justify-center gap-2 transition-all transform active:scale-[0.98] mt-6 shadow-xl shadow-white/5"
               >
                 {loading ? (
                   <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   <>
                     {isLogin ? <LogIn size={18} /> : <UserPlus size={18} />}
-                    {isLogin ? 'Sign In' : 'Sign Up'}
+                    {isLogin ? 'Sign In Now' : 'Create Account'}
                   </>
                 )}
               </button>
@@ -142,14 +150,14 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
 
             <div className="mt-6 flex items-center gap-4">
               <div className="flex-1 h-px bg-[#333]"></div>
-              <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">Or continue with</span>
+              <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Secure Login</span>
               <div className="flex-1 h-px bg-[#333]"></div>
             </div>
 
             <button
               onClick={handleGoogleSignIn}
               type="button"
-              className="w-full mt-6 py-3.5 bg-[#262626] hover:bg-[#333] text-white rounded-xl font-semibold flex items-center justify-center gap-3 transition-colors border border-[#424242]"
+              className="w-full mt-6 py-3 md:py-3.5 bg-[#262626] hover:bg-[#333] text-white rounded-xl font-semibold flex items-center justify-center gap-3 transition-colors border border-[#424242] text-sm"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -160,14 +168,14 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
               Google
             </button>
 
-            <div className="mt-8 text-center">
+            <div className="mt-8 text-center pb-4">
               <p className="text-sm text-gray-400">
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
                 <button 
                   onClick={() => setIsLogin(!isLogin)}
                   className="text-white font-bold hover:underline"
                 >
-                  {isLogin ? 'Sign up for free' : 'Log in'}
+                  {isLogin ? 'Sign up' : 'Log in'}
                 </button>
               </p>
             </div>

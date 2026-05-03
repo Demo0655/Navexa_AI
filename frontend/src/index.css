@@ -127,6 +127,15 @@ body {
   animation: shake 0.3s ease-in-out;
 }
 
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0.5; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Light Mode Overrides */
 html.light body, 
 html.light .bg-\[\#0a0a0a\],

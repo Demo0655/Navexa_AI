@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider 
 } from 'firebase/auth';
 import { auth } from '../firebase';
+import NavexaLogo from './NavexaLogo';
 
 const AuthModal = ({ onClose, onAuthSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);

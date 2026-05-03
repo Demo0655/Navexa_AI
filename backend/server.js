@@ -207,6 +207,10 @@ app.post('/api/delete-image', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Navexa Backend running at http://localhost:${port}`);
-});
+module.exports = app;
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Navexa Backend running at http://localhost:${port}`);
+  });
+}

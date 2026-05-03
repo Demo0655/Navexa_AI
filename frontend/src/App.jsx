@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { onAuthStateChanged, signOut, updateProfile } from 'firebase/auth';
 import { auth } from './firebase';
-import { Menu, LogOut, Camera, PanelLeft } from 'lucide-react';
+import { Menu, LogOut, Camera, PanelLeft, Sparkles } from 'lucide-react';
 import NavexaLogo from './components/NavexaLogo';
 import Sidebar from './components/Sidebar';
 import ChatContainer from './components/ChatContainer';

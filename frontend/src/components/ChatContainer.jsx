@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Terminal, Code, Search } from 'lucide-react';
+import { Terminal, Code, Search, Sparkles } from 'lucide-react';
 import MessageBubble from './MessageBubble';
 import NavexaLogo from './NavexaLogo';
 

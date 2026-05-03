@@ -294,59 +294,42 @@ function App() {
           </div>
         </header>
 
-        <div className={`flex-1 relative transition-all duration-700 ease-in-out ${messages.length === 0 ? 'flex flex-col justify-center pb-20' : 'flex flex-col'}`}>
-          <div className={`${messages.length === 0 ? 'hidden' : 'flex-1'} overflow-hidden`}>
-            <ChatContainer messages={messages} isTyping={isTyping} />
-          </div>
-
-          <div className={`transition-all duration-700 ease-in-out w-full px-4 md:px-0 ${messages.length === 0 ? 'transform translate-y-0' : 'pb-6 md:pb-10 pt-4 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a] to-transparent'}`}>
-            <div className="max-w-3xl mx-auto">
-              {messages.length === 0 && (
-                <div className="text-center mb-10 animate-fade-in">
-                  <div className="w-16 h-16 bg-blue-500/10 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-blue-500/10">
-                    <NavexaLogo size={32} className="text-blue-500" />
-                  </div>
-                  <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-white">How can I assist you?</h1>
-                  <p className="text-gray-400 max-w-md mx-auto text-sm md:text-base">
-                    Navexa AI is ready to chat, code, or research. Ask anything to get started.
-                  </p>
+        {messages.length === 0 ? (
+          /* ── EMPTY STATE: centered layout ── */
+          <div className="flex-1 flex flex-col items-center justify-center px-4 pb-16">
+            <div className="w-full max-w-3xl">
+              <div className="text-center mb-10 animate-fade-in">
+                <div className="w-16 h-16 bg-blue-500/10 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-blue-500/10">
+                  <NavexaLogo size={32} className="text-blue-500" />
                 </div>
-              )}
-              
+                <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-white">How can I assist you?</h1>
+                <p className="text-gray-400 max-w-md mx-auto text-sm md:text-base">
+                  Navexa AI is ready to chat, code, or research. Ask anything to get started.
+                </p>
+              </div>
+
               <div onClickCapture={(e) => {
-                if (!user) {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  setShowAuthModal(true);
-                }
+                if (!user) { e.stopPropagation(); e.preventDefault(); setShowAuthModal(true); }
               }}>
                 <InputBox onSend={handleSendMessage} disabled={isTyping || !user} />
               </div>
 
-              {messages.length === 0 && (
-                <div className="grid grid-cols-2 gap-3 mt-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                  <div 
-                    onClick={() => handleSendMessage("Create a login page in HTML")}
-                    className="p-4 bg-[#171717] border border-[#333] rounded-2xl text-left hover:border-blue-500/50 transition-all cursor-pointer group"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center mb-3 group-hover:bg-blue-500/20 transition-colors">
-                      <PanelLeft size={16} className="text-blue-500" />
-                    </div>
-                    <p className="text-xs font-bold mb-1">Coding Mode</p>
-                    <p className="text-[10px] text-gray-500">"Create a login page in HTML"</p>
+              <div className="grid grid-cols-2 gap-3 mt-8 animate-fade-in">
+                <div onClick={() => handleSendMessage("Create a login page in HTML")} className="p-4 bg-[#171717] border border-[#333] rounded-2xl text-left hover:border-blue-500/50 transition-all cursor-pointer group">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center mb-3 group-hover:bg-blue-500/20 transition-colors">
+                    <PanelLeft size={16} className="text-blue-500" />
                   </div>
-                  <div 
-                    onClick={() => handleSendMessage("Compare Flutter vs React Native")}
-                    className="p-4 bg-[#171717] border border-[#333] rounded-2xl text-left hover:border-purple-500/50 transition-all cursor-pointer group"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center mb-3 group-hover:bg-purple-500/20 transition-colors">
-                      <NavexaLogo size={16} className="text-purple-500" />
-                    </div>
-                    <p className="text-xs font-bold mb-1">Research Mode</p>
-                    <p className="text-[10px] text-gray-500">"Compare Flutter vs React Native"</p>
-                  </div>
+                  <p className="text-xs font-bold mb-1">Coding Mode</p>
+                  <p className="text-[10px] text-gray-500">"Create a login page in HTML"</p>
                 </div>
-              )}
+                <div onClick={() => handleSendMessage("Compare Flutter vs React Native")} className="p-4 bg-[#171717] border border-[#333] rounded-2xl text-left hover:border-purple-500/50 transition-all cursor-pointer group">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center mb-3 group-hover:bg-purple-500/20 transition-colors">
+                    <NavexaLogo size={16} className="text-purple-500" />
+                  </div>
+                  <p className="text-xs font-bold mb-1">Research Mode</p>
+                  <p className="text-[10px] text-gray-500">"Compare Flutter vs React Native"</p>
+                </div>
+              </div>
 
               <div className="flex justify-center items-center gap-4 mt-6 opacity-40">
                 <p className="text-[9px] text-gray-400 uppercase font-black tracking-[0.4em]">Navexa AI</p>
@@ -355,7 +338,23 @@ function App() {
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          /* ── CHAT STATE: messages + fixed input ── */
+          <>
+            <div className="flex-1 overflow-y-auto min-h-0">
+              <ChatContainer messages={messages} isTyping={isTyping} />
+            </div>
+            <div className="flex-shrink-0 px-4 py-4 md:py-6 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/95 to-transparent">
+              <div className="max-w-3xl mx-auto">
+                <div onClickCapture={(e) => {
+                  if (!user) { e.stopPropagation(); e.preventDefault(); setShowAuthModal(true); }
+                }}>
+                  <InputBox onSend={handleSendMessage} disabled={isTyping || !user} />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </main>
 
       {showProfileModal && (
